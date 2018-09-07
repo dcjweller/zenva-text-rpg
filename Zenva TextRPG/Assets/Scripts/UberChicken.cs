@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TextRPG
 {
-    public class ViciousChicken : Enemy
+    public class UberChicken : Enemy
     {
 
         // Use this for initialization
