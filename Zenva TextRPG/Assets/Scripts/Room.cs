@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace TextRPG
 {
-    public class Room : MonoBehaviour
+    public class Room 
     {
         public Chest Chest { get; set; }
         public Enemy Enemy { get; set; }

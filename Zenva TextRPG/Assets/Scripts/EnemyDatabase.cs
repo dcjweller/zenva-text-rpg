@@ -19,7 +19,7 @@ namespace TextRPG
 
             foreach (Enemy enemy in GetComponents<Enemy>())
             {
-                Debug.Log("Found an Enemy");
+                Debug.Log("Found an Enemy in the database");
                 Enemies.Add(enemy); 
             }
         }
