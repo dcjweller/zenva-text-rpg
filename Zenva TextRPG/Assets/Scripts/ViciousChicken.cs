@@ -15,6 +15,7 @@ namespace TextRPG
             Defence = 3;
             Gold = 20;
             Inventory.Add("Bandit Mask");
+            Description = "Vicious Chicken";
         }
 
        

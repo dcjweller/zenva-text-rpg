@@ -9,8 +9,10 @@ namespace TextRPG
     {
 
         public int Floor { get; set; }
+        public Room Room { get; set; }
+        [SerializeField] World world;
+        [SerializeField] Encounter encounter;
 
-        // Use this for initialization
         void Start()
         {
             Floor = 0;
@@ -19,10 +21,71 @@ namespace TextRPG
             Defence = 5;
             Inventory = new List<string>();
             RoomIndex = new Vector2(2, 2);
+            this.Room = world.Dungeon[((int)RoomIndex.x), ((int)RoomIndex.y)];
+            this.Room.Empty = true;
+            AddItem("Goose Brains");
+            
+        }
+
+        public void Move(int direction)
+        {
+            if (this.Room.Enemy)
+            {
+                return;
+            }
+
+            if (direction == 0 && RoomIndex.y > 0)
+            {
+                RoomIndex -= Vector2.up; 
+            }
+            
+            if (direction == 1 && RoomIndex.x < world.Dungeon.GetLength(0)-1)
+            {
+                Journal.Instance.Log("You head East.");
+                RoomIndex += Vector2.right;
+            }
+
+            if (direction == 2 && RoomIndex.y < world.Dungeon.GetLength(1)-1)
+            {
+                Journal.Instance.Log("You head South.");
+                RoomIndex -=Vector2.down;
+            }
+
+            if (direction == 3 && RoomIndex.x > 0)
+            {
+                Journal.Instance.Log("You head West.");
+                RoomIndex += Vector2.left;
+            }
+            if (this.Room.RoomIndex != RoomIndex)
+            Investigate();
+        }
+
+        public void Investigate()
+        {
+            encounter.ResetDynamicControls();
+            this.Room = world.Dungeon[(int)RoomIndex.x, (int)RoomIndex.y];
+            if (this.Room.Empty)
+            {
+                Journal.Instance.Log("There's nothing interesting in this room...");
+            }
+            else if (this.Room.Chest != null)
+            {
+                Journal.Instance.Log("You've found a chest! What will you do?");
+            }
+            else if (this.Room.Enemy != null)
+            {
+                Journal.Instance.Log("Suddenly, a " + Room.Enemy.Description + " appears! What will you do?");
+                encounter.StartCombat();
+            }
+            else if (this.Room.Exit)
+            {
+                Journal.Instance.Log("You've found some stairs leading downwards...");
+            }
         }
 
         public void AddItem(string item)
         {
+            Journal.Instance.Log("You have received: " + item);
             Inventory.Add(item);
         }
 
