@@ -10,7 +10,7 @@ namespace TextRPG
 
         public int Floor { get; set; }
         public Room Room { get; set; }
-        [SerializeField] World world;
+        public World world;
         [SerializeField] Encounter encounter;
 
         void Start()
@@ -71,6 +71,7 @@ namespace TextRPG
             else if (this.Room.Chest != null)
             {
                 Journal.Instance.Log("You've found a chest! What will you do?");
+                encounter.StartChest();
             }
             else if (this.Room.Enemy != null)
             {
@@ -79,6 +80,7 @@ namespace TextRPG
             }
             else if (this.Room.Exit)
             {
+                encounter.StartExit();
                 Journal.Instance.Log("You've found some stairs leading downwards...");
             }
         }
