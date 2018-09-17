@@ -14,7 +14,6 @@ namespace TextRPG
             Attack = 8;
             Defence = 5;
             Gold = 30;
-            Description = "Uber Chicken";
             Inventory.Add("Sniper");
         }
 

@@ -9,10 +9,14 @@ namespace TextRPG
     {
 
         public int Floor { get; set; }
+<<<<<<< HEAD
         public Room Room { get; set; }
         public World world;
         [SerializeField] Encounter encounter;
+=======
+>>>>>>> parent of 4dd1d68... Day 5
 
+        // Use this for initialization
         void Start()
         {
             Floor = 0;
@@ -21,6 +25,7 @@ namespace TextRPG
             Defence = 5;
             Inventory = new List<string>();
             RoomIndex = new Vector2(2, 2);
+<<<<<<< HEAD
             this.Room = world.Dungeon[((int)RoomIndex.x), ((int)RoomIndex.y)];
             this.Room.Empty = true;
             AddItem("Goose Brains");
@@ -83,11 +88,12 @@ namespace TextRPG
                 encounter.StartExit();
                 Journal.Instance.Log("You've found some stairs leading downwards...");
             }
+=======
+>>>>>>> parent of 4dd1d68... Day 5
         }
 
         public void AddItem(string item)
         {
-            Journal.Instance.Log("You have received: " + item);
             Inventory.Add(item);
         }
 
